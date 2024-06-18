@@ -1,23 +1,20 @@
 services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
     restart: always
-    command: --admin-password "$$2y$$05$$QgoabVnNBN3gR4wezwQovOm0glw00bQvUPORrYxz7.rI/rnw07cBG"
-    security_opt:
-      - no-new-privileges:true
+    command: --auth-provider simple
     networks:
       - proxy
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    #       - ./portainer-data:/data
+      - ./dozzle-data:/data
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.portainer.rule=Host(`$DOMAIN`)'
-      - 'traefik.http.routers.portainer.entrypoints=websecure'
-      - 'traefik.http.routers.portainer.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.portainer.loadbalancer.server.port=9000'
+      - 'traefik.http.routers.dozzle.rule=Host(`$DOMAIN`)'
+      - 'traefik.http.routers.dozzle.entrypoints=websecure'
+      - 'traefik.http.routers.dozzle.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.dozzle.loadbalancer.server.port=8080'
 
 networks:
   proxy:
