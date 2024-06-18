@@ -8,7 +8,6 @@ services:
       - proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./dozzle-data:/data
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.dozzle.rule=Host(`$DOMAIN`)'
