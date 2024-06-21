@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   dozzle:
     image: amir20/dozzle:latest
@@ -11,14 +13,13 @@ services:
       - ./dozzle-data:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.chatbot-web.rule=Host(`dozzle.barron.agency`)"
-      - "traefik.http.routers.chatbot-web.entrypoints=web"
-      - "traefik.http.services.chatbot-web.loadbalancer.server.port=8080"
-      - "traefik.http.routers.chatbot-web-secure.rule=Host(`dozzle.barron.agency`)"
-      - "traefik.http.routers.chatbot-web-secure.entrypoints=websecure"
-      - "traefik.http.routers.chatbot-web-secure.tls=true"
+      - "traefik.http.routers.dozzle.rule=Host(`dozzle.barron.agency`)"  
+      - "traefik.http.routers.dozzle.entrypoints=web"
+      - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
+      - "traefik.http.routers.dozzle-secure.rule=Host(`dozzle.barron.agency`)"  
+      - "traefik.http.routers.dozzle-secure.entrypoints=websecure"
+      - "traefik.http.routers.dozzle-secure.tls=true"
 
 networks:
   proxy:
-    external: false
-    name: proxy
+    external: true  # Verwende ein externes Netzwerk, das von Traefik verwendet wird
