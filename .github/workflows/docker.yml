@@ -3,20 +3,14 @@ name: Docker Prod
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
     runs-on: self-hosted
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo DOMAIN=${{ secrets.DOMAIN }} > .env
-          cat .env
+      - uses: actions/checkout@v3
 
       - name: Docker run
-        run: docker compose up -d --force-recreate --build
+        run: docker-compose up -d --force-recreate --build
