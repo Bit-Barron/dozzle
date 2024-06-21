@@ -11,7 +11,7 @@ services:
       - ./dozzle-data:/data
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.dozzle.rule=Host(`$DOMAIN`)'
+      - 'traefik.http.routers.dozzle.rule=Host(`dozzle.barron.agency`)'
       - 'traefik.http.routers.dozzle.entrypoints=websecure'
       - 'traefik.http.routers.dozzle.tls.certresolver=letsencrypt'
       - 'traefik.http.services.dozzle.loadbalancer.server.port=8080'
